@@ -142,22 +142,16 @@
                 var condition = "";
                 var $options = $(".layer_selector").find("input");
                 $options.click(function(e) {
-                    var query = " WHERE ";
+                    var features = [];
                     for (i = 0; i < $options.length; i++) {
                         if ($options[i].checked) {
-                            if (query === " WHERE ") {
-                                var subquery = " ";
-                            } else {
-                                subquery = " OR ";
-                            }
-                            subquery += $options[i].name;
-                            subquery += " = 'TRUE'";
-                            query += subquery;
-
+                            features.push($options[i].name + " = 'TRUE'");
                         }
                     }
-                    console.log(query);
-                    var type = 'sql';
+                    var query = "";
+                    if (features.length > 0) {
+                        var query = " WHERE " + features.join(" OR ");
+                    }
                     layer.setSQL("SELECT * FROM " + tableName + query);
                 });
             }
