@@ -44,6 +44,10 @@
                 background-color: #F0F0F0;
                 cursor: pointer;
             }
+            .no-set-width {
+                width: auto !important;
+                max-width: none !important;
+            }
             </style>
 
             <style type="cartocss/html" id="simple">
@@ -108,7 +112,17 @@
                 <input type="checkbox" name="water_feature" /> Water Feature<br/>
             </ul>
         </div>
-
+        <script type="infowindow/html" id="infowindow_template">
+            <div class="cartodb-popup">
+                <a href="#close" class="cartodb-popup-close-button close">x</a>
+                <div class="cartodb-popup-content-wrapper no-set-width">
+                    <div class="cartodb-popup-content no-set-width">
+                       <strong>{{park_name}}</strong>
+                    </div>
+                </div>
+                <div class="cartodb-popup-tip-container"></div>
+            </div>
+        </script>
         <!-- include cartodb.js library -->
         <script src="http://libs.cartocdn.com/cartodb.js/v3/3.14/cartodb.js" type="text/javascript"></script>
         <!-- Place your code in the script tags below -->
@@ -165,6 +179,8 @@
                 .done(function(layer) {
                     sublayer = layer.getSubLayer(0);
                     createSelector(sublayer);
+                    var infowindow = cdb.vis.Vis.addInfowindow(map_object, sublayer, ['park_name'])
+                    infowindow.model.set('template', $('#infowindow_template').html());
                 })
                 .error(function(err) {
                     console.log("error: " + err);
