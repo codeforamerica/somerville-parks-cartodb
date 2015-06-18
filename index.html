@@ -14,12 +14,10 @@
                 padding: 0;
                 margin: 0;
             }
-            #cartocss {
+            #feature-list {
                 position: absolute;
                 top: 20px;
                 right: 20px;
-            }
-            .layer_selector {
                 background: rgba(255,255,255,0.9);
                 border-radius: 5px;
                 padding: 15px 30px;
@@ -28,27 +26,23 @@
                 height: 90%;
                 overflow-y: scroll;
             }
-            .layer_selector > p {
+            #feature-list > p {
                 padding: 15px 30px;
                 border-bottom: 1px solid #999;
             }
-            .layer_selector ul {
+            #feature-list ul {
                 padding: 0; margin: 0;
                 list-style-type: none;
                 font-family: Helvetica, Arial;
                 font-size: 13px;
                 color: #444;
             }
-            .layer_selector li:not(:last-child) {
+            #feature-list li:not(:last-child) {
                 border-bottom: 1px solid #999;
             }
-            .layer_selector li:hover {
+            #feature-list li:hover {
                 background-color: #F0F0F0;
                 cursor: pointer;
-            }
-            .layer_selector li.sql_selected,
-            .layer_selector li.cartocss_selected {
-                background-color: #A6CEE3;
             }
             </style>
 
@@ -69,7 +63,7 @@
     </head>
     <body>
         <div id="map"></div>
-        <div id="cartocss" class="layer_selector">
+        <div id="feature-list">
             <p>Park Features</p>
             <ul>
             <em>Select more features to narrow your search.</em>
@@ -141,7 +135,7 @@
             // Create layer selector
             function createSelector(layer) {
                 var condition = "";
-                var $options = $(".layer_selector").find("input");
+                var $options = $("#feature-list").find("input");
                 $options.click(function(e) {
                     var features = [];
                     for (i = 0; i < $options.length; i++) {
