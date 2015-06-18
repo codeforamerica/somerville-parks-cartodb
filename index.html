@@ -22,7 +22,7 @@
             .layer_selector {
                 background: rgba(255,255,255,0.9);
                 border-radius: 5px;
-                padding: 0;
+                padding: 15px 30px;
                 border: 1px solid #999;
                 width: 250px;
                 height: 90%;
@@ -35,7 +35,6 @@
             .layer_selector ul {
                 padding: 0; margin: 0;
                 list-style-type: none;
-                padding: 15px 30px;
                 font-family: Helvetica, Arial;
                 font-size: 13px;
                 color: #444;
@@ -73,6 +72,8 @@
         <div id="cartocss" class="layer_selector">
             <p>Park Features</p>
             <ul>
+            <em>Select more features to narrow your search.</em>
+            <br/>
                 <input type="checkbox" name="ada_swing"/> ADA Swing<br/>
                 <input type="checkbox" name="baby_swings" /> Baby Swings<br/>
                 <input type="checkbox" name="baseball___adult" /> Baseball - Adult<br/>
@@ -150,7 +151,7 @@
                     }
                     var query = "";
                     if (features.length > 0) {
-                        var query = " WHERE " + features.join(" OR ");
+                        var query = " WHERE " + features.join(" AND ");
                     }
                     layer.setSQL("SELECT * FROM " + tableName + query);
                 });
